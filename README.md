@@ -11,9 +11,7 @@ I've used the library PySide (wich is released under LGPL): https://pypi.python.
 	
 If I can, I'll add more stuff so if you like it, keep an eye out for future "updates" :)
 
-
-Made by: Iván Motos Montalbán
-
+	Made by: Iván Motos Montalbán
 
 '''
 
