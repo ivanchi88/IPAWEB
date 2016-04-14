@@ -3,6 +3,7 @@
 This program has been only tested on Windows 10 64 bits, but it should work on GNU/Linux, MAC-OS-X and in other platforms as the library is supported there. If not, let me know and I'll try to fix it.
 
 As you may see, there is an initial comment with a basic description:
+
 '''
 	This simple web browser is mainly used for learning the basics of GUI programming with python.
 	You are free to do anything you want with it, so I guess it is released under the GNU GPL license. 
