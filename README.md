@@ -14,7 +14,8 @@ If I can, I'll add more stuff so if you like it, keep an eye out for future "upd
 Made by: Iván Motos Montalbán
 '''
 
-Also, the commented lines over the code are just implementations that I've made for future "updates".
+Also, the commented lines over the code are just implementations that I've made for future "updates", but they are not completet yet.
+
 You can try to activate them and put the functions in the "__init__" to see them.
 
 
