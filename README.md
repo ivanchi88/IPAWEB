@@ -1,6 +1,6 @@
 # IPAWEB
 "Simple web browser using Python and PySide"
-This program has been only tested on Windows 10 64 bits, but it should work on GNU/Linux, MAC-OS-X and in other platforms as the library is supported there. If not, let me know and I'll try to fix it.
+This program has been only tested on Windows 10 64 bits and Ubuntu, but it should work on ohter GNU/Linux Distros, MAC-OS-X and other platforms as the library is supported there. If not, let me know and I'll try to fix it.
 
 As you may see, there is an initial comment with a basic description:
 
