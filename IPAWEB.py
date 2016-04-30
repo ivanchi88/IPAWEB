@@ -26,7 +26,7 @@ class VentanaNav(QtGui.QWidget):
 	def CrearVentana(self):
 		self.showMaximized()
 		self.setWindowTitle("IPAWEB") # Nombre del programa
-		self.setWindowFlags(self.windowFlags())
+		#self.setWindowFlags(self.windowFlags())
 
 	#Pantalla Principal
 	def crearPantallaPrincipal(self):
