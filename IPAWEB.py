@@ -26,8 +26,7 @@ class VentanaNav(QtGui.QWidget):
 	def CrearVentana(self):
 		self.showMaximized()
 		self.setWindowTitle("IPAWEB") # Nombre del programa
-		self.setWindowIcon(QtGui.QIcon('main_icon.ico')) # Icono del programa
-		# self.setWindowFlags(QtCore.Qt.FramelessWindowHint) #Tengo que mejorarlo aun
+		self.setWindowFlags(self.windowFlags())
 
 	#Pantalla Principal
 	def crearPantallaPrincipal(self):
@@ -59,10 +58,8 @@ class VentanaNav(QtGui.QWidget):
 		self.gridLayout1.addLayout(self.pestanyasLayout, 0, 0, 0, 20)
 
 		self.masPestanyas = QtGui.QPushButton(self, text = 'MAS')
-		self.gridLayout1.addWidget(self.masPestanyas, 0, 16, 1, 1)
-
-		self.btnMenu = QtGui.QPushButton(self, text = 'Menu')
-		self.gridLayout1.addWidget(self.btnMenu, 0, 17, 1, 1)
+		self.masPestanyas.setIcon(QtGui.QIcon('more.ico'))
+		self.gridLayout1.addWidget(self.masPestanyas, 0, 17, 1, 1)
 
 		self.btnMin = QtGui.QPushButton(self)
 		self.btnMin.setIcon(QtGui.QIcon('min.ico'))
@@ -76,14 +73,12 @@ class VentanaNav(QtGui.QWidget):
 		self.btnQuitar.setIcon(QtGui.QIcon('close.ico'))
 		self.gridLayout1.addWidget(self.btnQuitar, 0, 20, 1, 1 )
 
-
 		#QtGui.QWidget.hide(self.btnMenu)
 
 	def tabla2(self):
 		self.btnAtras = QtGui.QPushButton(self)
 		self.btnAtras.setIcon(QtGui.QIcon('back_button.ico'))
 		self.gridLayout2.addWidget(self.btnAtras, 0, 0, 1, 1)
-
 
 		self.btnAdelante = QtGui.QPushButton(self)
 		self.btnAdelante.setIcon(QtGui.QIcon('next_button.ico'))
@@ -99,14 +94,20 @@ class VentanaNav(QtGui.QWidget):
 		self.urlBox = QtGui.QLineEdit(self)
 		self.gridLayout2.addWidget(self.urlBox, 0, 4, 1, 1)
 
+		self.btnHome = QtGui.QPushButton(self)
+		self.btnHome.setIcon(QtGui.QIcon('home.ico'))
+		self.gridLayout2.addWidget(self.btnHome, 0, 5, 1, 1)
+
+		self.btnMenu = QtGui.QPushButton(self)
+		self.btnMenu.setIcon(QtGui.QIcon('settings.ico'))
+		self.gridLayout2.addWidget(self.btnMenu, 0, 6, 1, 1)
+
 	def tabla3(self):
 		#El navegador en sí
 		self.navegadorP = QtWebKit.QWebView(self)
 		self.gridLayout3.addWidget(self.navegadorP, 0, 0, 1, 1)
 		#Url de inicio
-		_url = "http://www.google.es"
-		self.urlBox.setText(str(_url))
-		self.navegadorP.load(QtCore.QUrl(_url))
+		self.cargarInicio()
 		
 	'''	
 		self.navegador2 = QtWebKit.QWebView(self)
@@ -185,6 +186,12 @@ class VentanaNav(QtGui.QWidget):
 			self.cargarUrl
 			)
 
+		QtCore.QObject.connect(
+			self.btnHome,
+			QtCore.SIGNAL('clicked()'),
+			self.cargarInicio
+			)
+
 		#tabla3
 		self.navegadorP.connect(  #de lo que forma parte
 			self.navegadorP,		#el "objeto" que se ve implicado
@@ -220,8 +227,14 @@ class VentanaNav(QtGui.QWidget):
 		self.navegadorP.load(QtCore.QUrl(url))
 		self.urlBox.setText(url)
 
+	def cargarInicio(self):
+		_url = "http://www.google.es"
+		self.urlBox.setText(str(_url))
+		self.navegadorP.load(QtCore.QUrl(_url))
+
 def main():
 	app = QtGui.QApplication(sys.argv)
+	app.setWindowIcon(QtGui.QIcon('main_icon.ico')) # Icono del programa
 	VentanaNavegadorP = VentanaNav()
 	VentanaNavegadorP.show()
 	sys.exit(app.exec_())
