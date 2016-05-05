@@ -13,6 +13,7 @@
 from PySide import QtCore, QtGui
 from PySide import QtWebKit
 from PySide import QtNetwork
+import os
 import sys
 
 class VentanaNav(QtGui.QWidget):
@@ -61,6 +62,10 @@ class VentanaNav(QtGui.QWidget):
 		self.masPestanyas.setIcon(QtGui.QIcon('more.ico'))
 		self.gridLayout1.addWidget(self.masPestanyas, 0, 17, 1, 1)
 
+		#prueba
+		self.titulo = QtGui.QLineEdit(self)
+		self.gridLayout1.addWidget(self.titulo, 0, 2, 1, 1)
+		#
 		self.btnMin = QtGui.QPushButton(self)
 		self.btnMin.setIcon(QtGui.QIcon('min.ico'))
 		self.gridLayout1.addWidget(self.btnMin, 0, 18, 1, 1 )
@@ -125,6 +130,7 @@ class VentanaNav(QtGui.QWidget):
 		# QtGui.QWidget.hide(self.navegadorV) # esto oculta navegadorV
 
 	#De momento lo voy a ocultar, porque no se que sera mas eficiente, si ir creando y destruyendo o tan solo ocultando.
+	Seguramente que a largo plazo, lo mas eficiente sera crear y destruir, para asi evitar un consumo innecesario de recursos
 	'''
 
 	def webkitThings(self): #Ni idea de que es esto, pero parece para activar funcionalidades extra. Investigar en un futuro.
@@ -198,6 +204,12 @@ class VentanaNav(QtGui.QWidget):
 			QtCore.SIGNAL('urlChanged(QUrl)'),	#la senyal que recibe
 			self.actualizarUrl		#lo que ocurre al recibir la senyal
 			)
+
+		self.navegadorP.connect( 
+			self.navegadorP,		
+			QtCore.SIGNAL('titleChanged(QString)'),	
+			self.actualizarTitulo	
+			)
 	''' faltan cosas por pulir
 	def moverVentana(self):
 		self.maximizar()
@@ -214,6 +226,18 @@ class VentanaNav(QtGui.QWidget):
 
 	def actualizarUrl(self):
 		self.urlBox.setText(str(self.navegadorP.url().toString()))
+		if os.path.exists('bin') == False:
+			os.mkdir('bin')
+		self.historialUrl_file = open('bin\histUrl.txt', 'a')
+		self.historialUrl_file.write(str(self.navegadorP.url().toString()) + '\n')
+		self.historialTile_file.close()
+
+	def actualizarTitulo(self):
+		if os.path.exists('bin') == False:
+			os.mkdir('bin')
+		self.historialTile_file = open('bin\histTitle.txt', 'a')
+		self.historialTile_file.write(str(self.navegadorP.title(QString)) + '\n')
+		self.historialTile_file.close()
 
 	def cargarUrl(self):
 		url = self.urlBox.text()
